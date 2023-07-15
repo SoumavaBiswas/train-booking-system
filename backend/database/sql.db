@@ -1,0 +1,79 @@
+CREATE DOMAIN COUCH_ROWS AS REAL CHECK
+(value >= 1 AND value <= 7);
+
+CREATE DOMAIN ROW_SEAT AS CHAR CHECK
+(value = 'A' OR value = 'B' OR value = 'C' OR value = 'D' OR value = 'E' OR value = 'F' OR value = 'G');
+
+CREATE TABLE bookings
+(
+ROW_NO COUCH_ROWS,
+SEAT_NO ROW_SEAT,
+AVAILABLE BOOlean NOT NULL,   
+PRIMARY KEY (ROW_NO,SEAT_NO)
+);
+
+INSERT INTO bookings (ROW_NO, SEAT_NO, AVAILABLE)
+VALUES (1, 'A', true),
+       (1, 'B', true),
+       (1, 'C', false),
+       (1, 'D', false),
+       (1, 'E', false),
+       (1, 'F', true),
+       (1, 'G', true),
+       (2, 'A', true),
+       (2, 'B', true),
+       (2, 'C', true),
+       (2, 'D', true),
+       (2, 'E', false),
+       (2, 'F', false),
+       (2, 'G', true),
+       (3, 'A', true),
+       (3, 'B', true),
+       (3, 'C', true),
+       (3, 'D', true),
+       (3, 'E', true),
+       (3, 'F', false),
+       (3, 'G', true),
+       (4, 'A', true),
+       (4, 'B', true),
+       (4, 'C', true),
+       (4, 'D', true),
+       (4, 'E', true),
+       (4, 'F', true),
+       (4, 'G', true),
+       (5, 'A', false),
+       (5, 'B', false),
+       (5, 'C', false),
+       (5, 'D', false),
+       (5, 'E', false),     
+       (5, 'F', false),
+       (5, 'G', true),
+       (6, 'A', true),
+       (6, 'B', true),
+       (6, 'C', true),
+       (6, 'D', true),
+       (6, 'E', true),
+       (6, 'F', true),
+       (6, 'G', true),
+       (7, 'A', true),
+       (7, 'B', true),
+       (7, 'C', true);
+
+
+------------------- NOT REQUIRED ----------------------------------------
+CREATE TABLE booking_info
+(
+ROW_NO COUCH_ROWS PRIMARY KEY,
+AVAILABLE_CONSECUTIVE_SEATS INT,
+STARTING_SEAT_NO ROW_SEAT
+);
+
+INSERT INTO booking_info (ROW_NO, AVAILABLE_CONSECUTIVE_SEATS, STARTING_SEAT_NO)
+VALUES (1, 2, 'A'),
+       (2, 7, 'A'),
+       (3, 4, 'A'),
+       (4, 7, 'A'),
+       (5, 1, 'G'),
+       (6, 7, 'A'),
+       (7, 3, 'A');
+-------------------------------------------------------------------------------------------

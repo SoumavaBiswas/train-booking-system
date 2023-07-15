@@ -1,0 +1,90 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is the swagger documentation to demonstrate REST APIs made for train booking system",
+        "version": "1.0.0",
+        "title": "Train Booking API",
+        "contact": {
+            "email": "soumavabiswas15@@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "schemes": ["http"],
+    "host": "localhost:5000",
+    "basePath": "/api/v1/bookings",
+    "paths" : {
+        "/emptySeats" : {
+            "get" : {
+                "summary" : "Get all available seats",
+                "description": "Get all available seats in the couch along with row number.",
+                "produces": ["application/json"],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                }
+            }
+        },
+        "/seats" : {
+            "get" : {
+                "summary" : "Info of all seat",
+                "description": "Gives info of all seats along with row no, seat no and status of the seat",
+                "produces": ["application/json"],
+                "consumes": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                }
+            }
+        },
+        "/bookSeat" : {
+            "post" : {
+                "summary" : "Books certain number of seats",
+                "description": "Books given number of seats. Tries to book in a row, if not possible then books seats in nearby rows.",
+                "produces": ["application/json"],
+                "consumes": ["application/json"],
+                "parameters":[{
+                    "in": "body",
+                    "name": "requiredSeats",
+                    "description": "task object",
+                    "required": true,
+                    "schema":{
+                        "type":"object",
+                        "$ref": "#/Task"
+                    }
+                }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                }
+            }
+        }
+    },
+    "Task": {
+        "type": "object",
+        "properties": {
+            "requiredSeats": {
+                "type": "string"
+            }
+        }
+    }
+}
