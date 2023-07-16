@@ -1,4 +1,4 @@
-const pool = require('../db')
+const pool = require('../database/db')
 const queryStrings = require('./queries')
 
 
@@ -18,7 +18,6 @@ const getSeatDetails = (req, res) => {
 
 const bookSeat = (req, res) => {
     const { requiredSeats } = req.body
-    console.log(`Method called with ${requiredSeats}`)
     if (requiredSeats > 7) {
         res.send({ "detail": "Can't book more than 7 seats!" })
     }
